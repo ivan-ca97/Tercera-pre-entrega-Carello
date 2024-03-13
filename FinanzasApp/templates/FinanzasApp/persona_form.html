@@ -1,0 +1,21 @@
+{% extends 'FinanzasApp/base.html' %} 
+{% load static %} 
+
+
+{% block titulo_principal %}
+
+<h1 class="mt-4">Persona</h1>
+
+{% endblock titulo_principal %}
+
+{% block contenido_principal %}
+    <br>
+    <form action="" method="POST">
+        {% csrf_token %} 
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Enviar">
+    </form>
+
+{% endblock contenido_principal %}

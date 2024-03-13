@@ -1,0 +1,80 @@
+{% extends 'FinanzasApp/base.html' %}
+{% load static %}
+
+{% block titulo_principal %}
+
+{% endblock titulo_principal %}
+
+
+{% block contenido_principal %}
+
+<br>
+<form action="{% url 'egresos_buscar' %}" method="get">
+    {% csrf_token %}
+    <p>Ingrese cadena a buscar (Persona titular): <input type="text" name="buscar" id="buscar"></p>
+    <input type="submit" value="Buscar">
+</form>
+<br>
+
+<a href="{% url 'egresos' %}" class="btn btn-secondary btn-sm"> Restablecer filtro </a>
+<br>
+
+
+<table>
+    <tr>
+        <td width="300"><h1>Egresos</h1></td>
+        <td>
+            <a
+            href="{% url 'egresos_create' %}"
+            class="btn btn-success btn-sm"
+            ><i class="fa fa-plus fa-lg" title="Nuevo egreso"> </i>
+            </a>
+        </td>
+    </tr>
+</table>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Monto</th>
+            <th>Titular</th>
+            <th>Forma de pago</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for egreso in egreso_list  %}
+    <tr>
+        <td>{{ egreso.id }}</td>
+        <td>{{ egreso.nombreEgreso }}</td>
+        <td>{{ egreso.descripcion }}</td>
+        <td>{{ egreso.monto }}</td>
+        <td>{{ egreso.titularNombre }}</td>
+        <td>{{ egreso.formaDePago }}</td>
+        <td>{{ egreso.fecha }}</td>
+
+        <td>
+            <a
+              href="{% url 'egresos_update' egreso.id %}"
+              class="btn btn-secondary"
+              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .35rem; --bs-btn-font-size: .75rem;"
+              >
+              <i class="fa-solid fa-user-pen" title="Editar egreso"></i>
+            </a>
+            <a
+              href="{% url 'egresos_delete' egreso.id %}"
+              class="btn btn-danger"
+              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+              >
+              <i class="fa-solid fa-trash" title="Borrar egreso"></i>
+            </a>
+          </td>        
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock contenido_principal %}
+

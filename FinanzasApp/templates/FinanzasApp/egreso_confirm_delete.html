@@ -1,0 +1,24 @@
+{% extends 'FinanzasApp/base.html' %} 
+{% load static %} 
+
+
+{% block titulo_principal %}
+
+<h1 class="mt-4">Egreso</h1>
+
+{% endblock titulo_principal %}
+
+{% block contenido_principal %}
+
+    <form action="" method="POST">
+        {% csrf_token %}   
+        <div class="text-center">     
+            <h2>¿Esta seguro de eliminar el egreso?</h2>
+            <p>Esta acción es irreversible</p>
+        </div>
+        <div class="text-center">
+            <input type="submit" class="btn btn-danger btn-block" value="Borrar">
+        </div>
+    </form>
+
+{% endblock contenido_principal %}

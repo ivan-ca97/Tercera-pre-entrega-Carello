@@ -1,0 +1,76 @@
+{% extends 'FinanzasApp/base.html' %}
+{% load static %}
+
+{% block titulo_principal %}
+{% endblock titulo_principal %}
+
+
+{% block contenido_principal %}
+
+<br>
+<form action="{% url 'ingresos_buscar' %}" method="get" text-align="center">
+    {% csrf_token %}
+    <p>Ingrese cadena a buscar (Persona titular): <input type="text" name="buscar" id="buscar" text-align="center"></p>
+    <input type="submit" value="Buscar" text-align="center">
+</form>
+<br>
+
+<a href="{% url 'ingresos' %}" class="btn btn-secondary btn-sm"> Restablecer filtro </a>
+<br>
+
+<table>
+    <tr>
+        <td width="300"><h1>Ingreso</h1></td>
+        <td>
+            <a
+            href="{% url 'ingresos_create' %}"
+            class="btn btn-success btn-sm"
+            ><i class="fa fa-plus fa-lg" title="Nuevo ingreso"> </i>
+            </a>
+        </td>
+    </tr>
+</table>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Monto</th>
+            <th>Titular</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for ingreso in ingreso_list %}
+    <tr>
+        <td>{{ ingreso.id }}</td>
+        <td>{{ ingreso.nombreIngreso }}</td>
+        <td>{{ ingreso.descripcion }}</td>
+        <td>{{ ingreso.monto }}</td>
+        <td>{{ ingreso.titularNombre }}</td>
+        <td>{{ ingreso.fecha }}</td>
+
+        <td>
+            <a
+              href="{% url 'ingresos_update' ingreso.id %}"
+              class="btn btn-secondary"
+              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .35rem; --bs-btn-font-size: .75rem;"
+              >
+              <i class="fa-solid fa-user-pen" title="Editar ingreso"></i>
+            </a>
+            <a
+              href="{% url 'ingresos_delete' ingreso.id %}"
+              class="btn btn-danger"
+              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+              >
+              <i class="fa-solid fa-trash" title="Borrar ingreso"></i>
+            </a>
+          </td>        
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock contenido_principal %}
+

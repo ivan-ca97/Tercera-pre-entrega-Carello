@@ -1,0 +1,65 @@
+{% extends 'FinanzasApp/base.html' %}
+{% load static %}
+
+{% block titulo_principal %}
+{% endblock titulo_principal %}
+
+
+{% block contenido_principal %}
+
+
+<table>
+    <tr>
+        <td width="300"><h1>Personas</h1></td>
+        <td>
+            <a
+            href="{% url 'persona_create' %}"
+            class="btn btn-success btn-sm"
+            ><i class="fa fa-plus fa-lg" title="Nueva persona"> </i>
+            </a>
+        </td>
+    </tr>
+</table>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>DNI</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for persona in persona_list  %}
+    <tr>
+        <td>{{ persona.id }}</td>
+        <td>{{ persona.nombre }}</td>
+        <td>{{ persona.apellido }}</td>
+        <td>{{ persona.dni }}</td>
+        <td>{{ persona.email }}</td>
+
+        <td>
+            <a
+              href="{% url 'persona_update' persona.id %}"
+              class="btn btn-secondary"
+              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .35rem; --bs-btn-font-size: .75rem;"
+              >
+              <i class="fa-solid fa-user-pen" title="Editar persona"></i>
+            </a>
+            <a
+              href="{% url 'persona_delete' persona.id %}"
+              class="btn btn-danger"
+              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+              >
+              <i class="fa-solid fa-trash" title="Borrar persona"></i>
+            </a>
+          </td>        
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock contenido_principal %}
+

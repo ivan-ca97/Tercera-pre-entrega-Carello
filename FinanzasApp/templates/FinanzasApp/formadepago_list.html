@@ -1,0 +1,62 @@
+{% extends 'FinanzasApp/base.html' %}
+{% load static %}
+
+{% block titulo_principal %}
+{% endblock titulo_principal %}
+
+
+{% block contenido_principal %}
+
+
+<table>
+    <tr>
+        <td width="300"><h1>Formas de pago</h1></td>
+        <td>
+            <a
+            href="{% url 'formas_de_pago_create' %}"
+            class="btn btn-success btn-sm"
+            ><i class="fa fa-plus fa-lg" title="Nueva forma de pago"> </i>
+            </a>
+        </td>
+    </tr>
+</table>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Crédito</th>
+            <th>Descripción</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for fdp in formadepago_list  %}
+    <tr>
+        <td>{{ fdp.id }}</td>
+        <td>{{ fdp.nombre }}</td>
+        <td>{{ fdp.credito }}</td>
+        <td>{{ fdp.descripcion }}</td>
+
+        <td>
+            <a
+              href="{% url 'formas_de_pago_update' fdp.id %}"
+              class="btn btn-secondary"
+              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .35rem; --bs-btn-font-size: .75rem;"
+              >
+              <i class="fa-solid fa-user-pen" title="Editar forma de pago"></i>
+            </a>
+            <a
+              href="{% url 'formas_de_pago_delete' fdp.id %}"
+              class="btn btn-danger"
+              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+              >
+              <i class="fa-solid fa-trash" title="Borrar forma de pago"></i>
+            </a>
+          </td>        
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock contenido_principal %}
+
